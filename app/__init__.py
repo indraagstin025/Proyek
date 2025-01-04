@@ -27,7 +27,7 @@ def create_app(config_name='default'):
         app.config.from_object('config.TestingConfig')
     elif config_name == 'development':
         app.config.from_object('config.DevelopmentConfig')
-    else:
+    elif config_name == 'prduction' :
         app.config.from_object('config.ProductionConfig')
     
     # Inisialisasi ekstensi
