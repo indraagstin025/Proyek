@@ -8,7 +8,6 @@ class Config:
         """Ambil variabel lingkungan dengan fallback."""
         return os.getenv(key, default)
 
-    # Kunci rahasia untuk aplikasi
     SECRET_KEY = get_env('SECRET_KEY', 'default-secret-key')
 
     # Konfigurasi database
@@ -20,13 +19,13 @@ class Config:
     MAIL_PORT = int(get_env('MAIL_PORT', 587))
     MAIL_USE_TLS = get_env('MAIL_USE_TLS', 'true').lower() in ['true', '1', 'yes']
     MAIL_USE_SSL = get_env('MAIL_USE_SSL', 'false').lower() in ['true', '1', 'yes']
-    MAIL_USERNAME = get_env('MAIL_USERNAME')
-    MAIL_PASSWORD = get_env('MAIL_PASSWORD')
-    MAIL_DEFAULT_SENDER = get_env('MAIL_DEFAULT_SENDER', MAIL_USERNAME)
+    MAIL_USERNAME = get_env('MAIL_USERNAME', '')
+    MAIL_PASSWORD = get_env('MAIL_PASSWORD', '')
+    MAIL_DEFAULT_SENDER = get_env('MAIL_DEFAULT_SENDER', MAIL_USERNAME if MAIL_USERNAME else None)
 
-    # Konfigurasi reset password
+    # Reset password
     PASSWORD_RESET_SALT = get_env('PASSWORD_RESET_SALT', 'default-salt')
-    PASSWORD_RESET_MAX_AGE = int(get_env('PASSWORD_RESET_MAX_AGE', 3600))  # Dalam detik (default: 1 jam)
+    PASSWORD_RESET_MAX_AGE = int(get_env('PASSWORD_RESET_MAX_AGE', 3600))
 
 class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
@@ -39,8 +38,7 @@ class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOGGING_LEVEL = 'ERROR'
-    
-    
+
 class DevelopmentConfig(Config):
-    DEVELOPMENT = True
     DEBUG = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

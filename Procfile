@@ -1,9 +1,1 @@
-nginx:
-  root: public_html/app/static
-  passenger:
-    enabled: "on"
-    app_env: development
-    app_root: public_html
-    python: .pyenv/shims/python
-    app_type: python
-    startup_file: wsgi.py
+web: gunicorn --bind 0.0.0.0:8000 wsgi:application
