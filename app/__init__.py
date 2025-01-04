@@ -4,6 +4,10 @@ from flask_login import LoginManager
 from dotenv import load_dotenv
 from app.extensions import init_extensions, db, mail
 from app.routes import register_blueprints
+from app.routes.auth import auth_bp
+from app.routes.dashboard import dashboard_bp
+from app.routes.document import document_bp
+
 import pymysql
 
 # Load environment variables
@@ -30,6 +34,11 @@ def create_app(config_name='default'):
     init_extensions(app)
     register_blueprints(app)
     mail.init_app(app)
+    
+    def register_blueprints(app):
+        app.register_blueprint(auth_bp, url_prefix='/auth')
+        app.register_blueprint(dashboard_bp)
+        app.register_blueprint(document_bp, url_prefix='/documents')
     
     # Tambahkan header untuk mencegah cache
     @app.after_request

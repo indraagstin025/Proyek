@@ -1,12 +1,7 @@
 from app import create_app
 
-# Buat aplikasi menggunakan konfigurasi production
+# Pastikan aplikasi dibuat dengan konfigurasi yang benar
 application = create_app(config_name='production')
 
-# Pastikan .env telah dimuat sebelumnya
-import os
-from dotenv import load_dotenv
-
-env_file = os.path.join(os.getcwd(), '.env')
-if os.path.exists(env_file):
-    load_dotenv(env_file)
+if __name__ == "__main__":
+    application.run()
