@@ -35,10 +35,7 @@ def create_app(config_name='default'):
     register_blueprints(app)
     mail.init_app(app)
     
-    def register_blueprints(app):
-        app.register_blueprint(auth_bp, url_prefix='/auth')
-        app.register_blueprint(dashboard_bp)
-        app.register_blueprint(document_bp, url_prefix='/documents')
+
     
     # Tambahkan header untuk mencegah cache
     @app.after_request
