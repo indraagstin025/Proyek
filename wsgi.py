@@ -1,12 +1,11 @@
 import os
-from app import create_app  # Impor fungsi create_app dari app/__init__.py
+from app import create_app
 
-# Gunakan variabel lingkungan untuk menentukan environment
+# Tentukan environment aplikasi
 config_name = os.getenv('FLASK_ENV', 'production')
 
-# Buat instance aplikasi Flask menggunakan fungsi create_app
+# Buat instance aplikasi Flask
 application = create_app(config_name=config_name)
 
 if __name__ == "__main__":
-    # Jalankan aplikasi Flask hanya jika dijalankan langsung
-    application.run(debug=(config_name == 'development'))
+    application.run()
