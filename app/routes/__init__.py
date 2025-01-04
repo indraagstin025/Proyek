@@ -1,7 +1,7 @@
 # app/routes/__init__.py
-from .auth import blueprint as auth_blueprint
-from .document import blueprint as document_blueprint
+from app.routes.auth import blueprint as auth_bp
+from app.routes.document import blueprint as document_bp
 
 def register_blueprints(app):
-    app.register_blueprint(auth_blueprint)
-    app.register_blueprint(document_blueprint)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(document_bp)
