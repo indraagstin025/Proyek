@@ -7,6 +7,8 @@ from flask_mail import Message
 from app.extensions import mail
 from itsdangerous import BadSignature, SignatureExpired
 
+auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 def generate_token(email, secret_key, salt):
     serializer = URLSafeTimedSerializer(secret_key)
     return serializer.dumps(email, salt=salt)
@@ -29,7 +31,6 @@ def send_reset_email(email, reset_url, sender):
     )
     mail.send(msg)
 
-auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
